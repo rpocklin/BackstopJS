@@ -73,7 +73,7 @@ function writeBrowserReport (config, reporter) {
     var jsonReport = JSON.stringify(browserReporter, null, 2);
     var jsonpReport = `report(${jsonReport});`;
 
-    var jsonConfgWrite = fs.writeFile(testReportJsonName, jsonReport).then(function () {
+    var jsonConfigWrite = fs.writeFile(testReportJsonName, jsonReport).then(function () {
       logger.log('Copied json report to: ' + testReportJsonName);
     }, function (err) {
       logger.error('Failed json report copy to: ' + testReportJsonName);
@@ -87,7 +87,7 @@ function writeBrowserReport (config, reporter) {
       throw err;
     });
 
-    return allSettled([jsonpConfgWrite, jsonConfgWrite]);
+    return allSettled([jsonpConfgWrite, jsonConfigWrite]);
   }).then(function () {
     if (config.openReport && config.report && config.report.indexOf('browser') > -1) {
       var executeCommand = require('./index');
